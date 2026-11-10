@@ -3,7 +3,14 @@
 // Import "Component", the base class that App builds on (no hooks needed).
 import { Component } from 'react'
 // Import the basic React Native pieces we draw with.
-import { ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import {
+  ScrollView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native'
 // Import the pieces that keep our content away from the phone's notch.
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context'
 
@@ -20,12 +27,12 @@ import { pokemonList } from './data/pokemonData'
 // A fixed list describing the 3 generations. It never changes.
 const GENERATIONS = [
   // Generation 1: its number, the roman numeral shown on screen, its region and its color.
-  { number: 1, roman: 'I', region: 'Kanto', color: '#e05a5a' },
+  { number: 1, roman: 'I', region: 'Kanto', color: '#f13447' },
   // Generation 2.
   { number: 2, roman: 'II', region: 'Johto', color: '#e0a020' },
   // Generation 3.
   { number: 3, roman: 'III', region: 'Hoenn', color: '#2a9d8f' },
-// End of the GENERATIONS list.
+  // End of the GENERATIONS list.
 ]
 
 // App is a class. "export default" means this is the main thing this file provides.
@@ -40,9 +47,9 @@ export default class App extends Component {
       selectedGeneration: null,
       // null means "no popup". A Pokemon means "show the popup for that Pokemon".
       selectedPokemon: null,
-    // End of the state.
+      // End of the state.
     }
-  // End of the constructor.
+    // End of the constructor.
   }
 
   // render() runs whenever the screen needs drawing. It returns what to draw.
@@ -58,14 +65,14 @@ export default class App extends Component {
     const goBack = function () {
       // Set the generation back to null, which shows the HOME screen again.
       app.setState({ selectedGeneration: null })
-    // End of the function.
+      // End of the function.
     }
 
     // A plain function that runs when the popup's "< Close" is tapped.
     const closePopup = function () {
       // Set the Pokemon back to null, which hides the popup.
       app.setState({ selectedPokemon: null })
-    // End of the function.
+      // End of the function.
     }
 
     // "screen" will hold whichever screen we want to show.
@@ -90,16 +97,16 @@ export default class App extends Component {
           if (pokemonList[j].generation === gen.number) {
             // ...add 1 to the count.
             count = count + 1
-          // End of the if.
+            // End of the if.
           }
-        // End of the Pokemon loop.
+          // End of the Pokemon loop.
         }
 
         // A plain function that runs when this generation's box is tapped.
         const openGeneration = function () {
           // Remember this generation. React then redraws and shows the LIST screen.
           app.setState({ selectedGeneration: gen.number })
-        // End of the function.
+          // End of the function.
         }
 
         // Make a box for this generation and add it to the end of the list.
@@ -113,7 +120,7 @@ export default class App extends Component {
             onPress={openGeneration} // pass the tap function to the card
           />,
         )
-      // End of the generation loop.
+        // End of the generation loop.
       }
 
       // Put the title, subtitle and boxes together as the HOME screen.
@@ -128,7 +135,7 @@ export default class App extends Component {
           {generationCards}
         </View>
       )
-    // Otherwise a generation IS selected...
+      // Otherwise a generation IS selected...
     } else {
       // ...find its info (we need the region name). Start with nothing found.
       let generation = null
@@ -139,9 +146,9 @@ export default class App extends Component {
         if (GENERATIONS[i].number === selectedGeneration) {
           // ...remember it.
           generation = GENERATIONS[i]
-        // End of the if.
+          // End of the if.
         }
-      // End of the loop.
+        // End of the loop.
       }
 
       // An empty list to hold one card per Pokemon in this generation.
@@ -158,7 +165,7 @@ export default class App extends Component {
           const openPokemon = function () {
             // Remember this Pokemon. That opens the popup.
             app.setState({ selectedPokemon: pokemon })
-          // End of the function.
+            // End of the function.
           }
 
           // Make a card for it and add it to the end of the list.
@@ -169,9 +176,9 @@ export default class App extends Component {
               onPress={openPokemon} // give the card the tap function
             />,
           )
-        // End of the if.
+          // End of the if.
         }
-      // End of the Pokemon loop.
+        // End of the Pokemon loop.
       }
 
       // Build the LIST screen.
@@ -191,7 +198,7 @@ export default class App extends Component {
           {pokemonCards}
         </View>
       )
-    // End of the if / else.
+      // End of the if / else.
     }
 
     // The final output of render(): what gets drawn on the phone.
@@ -203,15 +210,17 @@ export default class App extends Component {
           {/* "dark-content" makes the clock and battery icons dark. */}
           <StatusBar barStyle="dark-content" />
           {/* Put whichever screen we picked inside a scrollable area. */}
-          <ScrollView contentContainerStyle={styles.scrollContent}>{screen}</ScrollView>
+          <ScrollView contentContainerStyle={styles.scrollContent}>
+            {screen}
+          </ScrollView>
           {/* The popup. It draws nothing while selectedPokemon is null. */}
           <PokemonDetailModal pokemon={selectedPokemon} onClose={closePopup} />
         </SafeAreaView>
       </SafeAreaProvider>
     )
-  // End of render().
+    // End of render().
   }
-// End of the App class.
+  // End of the App class.
 }
 
 // Styles are plain objects. StyleSheet.create bundles them; we use them as style={styles.name}.
@@ -219,7 +228,7 @@ const styles = StyleSheet.create({
   // The whole screen.
   container: {
     flex: 1, // take up all the available space
-    backgroundColor: '#f4f6fb', // light blue-grey background
+    backgroundColor: '#fbf7f7', // light blue-grey background
   },
   // The area inside the ScrollView.
   scrollContent: {
@@ -248,7 +257,7 @@ const styles = StyleSheet.create({
   // The text inside the back button.
   backButtonText: {
     fontSize: 16, // text size
-    color: '#5b7fdb', // blue
+    color: '#02278d', // blue
     fontWeight: '600', // semi-bold
   },
 })

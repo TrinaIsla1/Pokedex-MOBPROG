@@ -9,7 +9,7 @@ export const TYPE_COLORS = {
   Normal: '#A8A878', // color for Normal type
   Fire: '#e74712', // color for Fire type
   Water: '#6890F0', // color for Water type
-  Electric: '#F8D030', // color for Electric type
+  Electric: '#f0f419', // color for Electric type
   Grass: '#78C850', // color for Grass type
   Ice: '#98D8D8', // color for Ice type
   Fighting: '#C03028', // color for Fighting type

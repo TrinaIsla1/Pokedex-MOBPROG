@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
   // The white card.
   card: {
     flexDirection: 'row', // stripe | picture | text, side by side
-    backgroundColor: '#ffffff', // white
+    backgroundColor: '#fbf7f7', // white
     borderRadius: 16, // rounded corners
     marginHorizontal: 16, // space outside, left and right
     marginVertical: 7, // space outside, top and bottom
@@ -70,15 +70,15 @@ const styles = StyleSheet.create({
   },
   // The Pokemon picture.
   image: {
-    width: 68, // picture width
-    height: 68, // picture height
+    width: 88, // picture width
+    height: 88, // picture height
     margin: 10, // space around the picture
   },
   // The text area.
   info: {
     flex: 1, // take all the remaining width
     paddingVertical: 12, // space inside, top and bottom
-    paddingRight: 12, // space inside, right
+    paddingRight: 12, // space inside, right side only
     justifyContent: 'center', // center the text vertically
   },
   // The row with the name and the number.

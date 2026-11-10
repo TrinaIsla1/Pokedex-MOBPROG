@@ -115,7 +115,7 @@ export default function PokemonDetailModal(props) {
 
         {/* The name. */}
         <Text style={styles.name}>{pokemon.name}</Text>
-        {/* The number, like "#144". */}
+        {/* The number, like "rgb(36, 118, 118)". */}
         <Text style={styles.number}>#{formatNumber(pokemon.id)}</Text>
         {/* The type, like "Ice/Flying". */}
         <Text style={styles.type}>{pokemon.type}</Text>
@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   // The whole popup background.
   screen: {
     flex: 1, // fill the whole popup
-    backgroundColor: '#f4f6fb', // light blue-grey
+    backgroundColor: '#fffcfc', // light blue-grey
   },
   // The area inside the ScrollView.
   content: {
@@ -182,8 +182,8 @@ const styles = StyleSheet.create({
   },
   // The big picture.
   image: {
-    width: 190, // picture width
-    height: 190, // picture height
+    width: 290, // picture width
+    height: 200, // picture height
   },
   // The Pokemon's name.
   name: {
@@ -196,7 +196,7 @@ const styles = StyleSheet.create({
   // The dex number.
   number: {
     fontSize: 14, // text size
-    color: '#aaaaaa', // faint grey
+    color: '#605b5b', // faint grey
     textAlign: 'center', // center horizontally
   },
   // The type, like "Ice/Flying".
@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
   },
   // The right side of a row, like "90".
   rowValue: {
-    fontSize: 14, // text size
+    fontSize: 15, // text size
     fontWeight: '700', // bold
     color: '#222222', // dark grey
   },
