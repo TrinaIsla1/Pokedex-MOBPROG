@@ -164,6 +164,7 @@ async function loadPokemon(id) {
       value: st.base_stat,
     })),
     abilities: p.abilities.map((a) => titleCase(a.ability.name)),
+    cry: p.cries?.latest || p.cries?.legacy || null, // .ogg file hosted by PokeAPI
   }
 }
 

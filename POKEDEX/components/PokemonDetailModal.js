@@ -11,6 +11,7 @@ import {
   useWindowDimensions,
 } from 'react-native'
 import { Image } from 'expo-image'
+import { useAudioPlayer, useAudioPlayerStatus } from 'expo-audio'
 import { useSafeAreaInsets } from 'react-native-safe-area-context'
 import { useTheme } from '../context/ThemeContext'
 import { useEncounters, useEvolutions, useForms } from '../hooks/usePokemon'
@@ -134,6 +135,25 @@ export default function PokemonDetailModal({ pokemon, onClose }) {
   const forms = useForms(pokemon ? pokemon.id : null)
   const [page, setPage] = useState(0)
   useEffect(() => setPage(0), [pokemon?.id])
+
+  // Cry: one player for the popup; load the new cry whenever another Pokemon opens, stop it when switching or closing.
+  const player = useAudioPlayer(null)
+  const cryStatus = useAudioPlayerStatus(player)
+  useEffect(() => {
+    if (pokemon?.cry) player.replace(pokemon.cry)
+    return () => {
+      try {
+        player.pause()
+      } catch {}
+    }
+  }, [pokemon?.id])
+  const playCry = () => {
+    if (!pokemon?.cry) return
+    try {
+      player.seekTo(0)?.catch?.(() => {})
+    } catch {}
+    player.play()
+  }
   if (!pokemon) return null
 
   const mythic = pokemon.rarity === 'Mythical'
@@ -409,6 +429,31 @@ export default function PokemonDetailModal({ pokemon, onClose }) {
                 >
                   <HeartButton id={pokemon.id} size={6 * u} />
                 </View>
+                {page === 0 && pokemon.cry ? (
+                  <Pressable
+                    onPress={playCry}
+                    hitSlop={10}
+                    accessibilityLabel={`Play ${pokemon.name} cry`}
+                    style={{
+                      position: 'absolute',
+                      left: 2 * u,
+                      top: 1.5 * u,
+                      zIndex: 2,
+                      width: 9 * u,
+                      height: 9 * u,
+                      borderRadius: 5 * u,
+                      backgroundColor: cryStatus.playing ? tint : '#FFFFFFD9',
+                      borderWidth: 1.5,
+                      borderColor: tint,
+                      alignItems: 'center',
+                      justifyContent: 'center',
+                    }}
+                  >
+                    <Text style={{ fontSize: fs(4.6, 15) }}>
+                      {cryStatus.playing ? '🔊' : '🔈'}
+                    </Text>
+                  </Pressable>
+                ) : null}
 
                 {page === 0 ? (
                   <View
